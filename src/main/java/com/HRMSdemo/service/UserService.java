@@ -27,7 +27,7 @@ public class UserService {
     @Autowired
     private LoginRepository lRepo;
 
-    private Random random = new Random();
+    
 
     public Users saveUser(Users user) {
        
