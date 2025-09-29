@@ -2,6 +2,7 @@ package com.HRMSdemo.service;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +97,7 @@ public class UserService {
         login.setRole(status.equalsIgnoreCase("selected") ? role : null);
 
         // Set username and save once
-        login.setUsername(user.getFirstName() + random.nextInt(100));
+        login.setUsername(user.getFirstName() + UUID.randomUUID().toString().substring(0, 3));
         lRepo.save(login);
 
         // Send email
