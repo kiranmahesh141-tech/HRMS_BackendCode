@@ -44,19 +44,25 @@ public class GlobalExceptionHandler {
  
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Map<String, String>> handleDuplicateException(DataIntegrityViolationException ex) {
-        String message = "Duplicate entry detected!";
-        String field = null;
- 
-        if (ex.getMessage().contains("phone")) {
-            message = "Mobile number already exists!";
-            field = "phone";
-        } else if (ex.getMessage().contains("email")) {
+    String message = "Duplicate entry detected!";
+    String field = null;
+
+    Throwable rootCause = ex.getRootCause();
+    String rootMessage = rootCause != null ? rootCause.getMessage() : ex.getMessage();
+
+    if (rootMessage != null) {
+        if (rootMessage.toLowerCase().contains("email")) {   // case-insensitive
             message = "Email already exists!";
             field = "email";
+        } else if (rootMessage.toLowerCase().contains("phone")) {
+            message = "Phone already exists!";
+            field = "phone";
         }
- 
-        return buildError(HttpStatus.CONFLICT, message, field);
     }
+
+    return buildError(HttpStatus.CONFLICT, message, field);
+}
+
     @ExceptionHandler(UserNotActiveException.class)
     public ResponseEntity<Map<String, String>> handleUserNotActive(UserNotActiveException ex) {
         return buildError(HttpStatus.NOT_ACCEPTABLE, ex.getMessage(), "status");

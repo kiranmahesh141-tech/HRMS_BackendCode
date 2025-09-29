@@ -5,7 +5,6 @@ import java.util.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.HRMSdemo.Exceptions.InValidPasswordException;
 import com.HRMSdemo.Exceptions.UserNotActiveException;
 import com.HRMSdemo.Exceptions.UserNotFoundException;
@@ -52,7 +51,6 @@ public class UserController {
 	    return ResponseEntity.ok(updatedUser);
 	}
 
-
 	@GetMapping("/getAllUsers")
 	public ResponseEntity<List<Users>> getall() {
 		return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
@@ -76,7 +74,6 @@ public class UserController {
 	    List<Users> users = service.searchPhone(phone);
 	    return ResponseEntity.ok(users);
 	}
-
 
 	@GetMapping("/searchEmail")
 	public ResponseEntity<List<Users>> searchUsersByEmail(@RequestParam("email") String email) {
@@ -109,7 +106,4 @@ public class UserController {
 	 
 	    return ResponseEntity.ok(response);
 	}
-
-	
-
 }
