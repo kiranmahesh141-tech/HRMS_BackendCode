@@ -38,7 +38,6 @@ public class HRController {
 		return new ResponseEntity<>(hrService.getAll(), HttpStatus.OK);
 	}
 
-	
 
 	@GetMapping("/searchName")
 	public ResponseEntity<List<Users>> searchUsersByName(@RequestParam("fullName") String name) {
@@ -48,7 +47,7 @@ public class HRController {
 
 	@GetMapping("/searchPhone")
 	public ResponseEntity<List<Users>> searchUsersByPhone(
-	    @RequestParam("phone") Long phone
+	    @RequestParam("phone") String phone
 	) {
 	    List<Users> users = hrService.searchPhone(phone);
 	    return ResponseEntity.ok(users);

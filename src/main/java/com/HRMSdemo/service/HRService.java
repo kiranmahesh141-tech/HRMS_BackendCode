@@ -42,19 +42,15 @@ public class HRService {
 
         // Search by email
         if (user == null && mail != null && !mail.isEmpty()) {
-            List<Users> users = URepo.findByEmail(mail);
+             List<Users> users = URepo.findByEmail(mail);
             if (!users.isEmpty()) user = users.get(0);
         }
 
-       if (user == null && phone != null && !phone.isEmpty()) {
-    try {
-        Long phoneNumber = Long.parseLong(phone);
-        List<Users> users = URepo.findByPhone(phoneNumber);
-        if (!users.isEmpty()) user = users.get(0);
-    } catch (NumberFormatException e) {
-        // handle invalid number
-    }
-}
+        // Search by phone
+        if (user == null && phone !=null && !phone.isEmpty()) {
+            List<Users> users = URepo.findByPhone(phone);
+            if (!users.isEmpty()) user = users.get(0);
+        }
 
         if (user == null) throw new UserNotFoundException("User Not Found");
 
@@ -92,13 +88,11 @@ public class HRService {
         return URepo.findAll();
     }
 
-    
-
     public List<Users> searchName(String name) {
         return URepo.findByFullName(name);
     }
 
-    public List<Users> searchPhone(Long phone) {
+    public List<Users> searchPhone(String phone) {
         return URepo.findByPhone(phone);
     }
     
