@@ -10,22 +10,16 @@ import com.HRMSdemo.dto.Users;
 
 public interface UserRepository extends JpaRepository<Users, String> {
 
-	boolean existsByEmail(String email);
+	 boolean existsByEmail(String email);
 
-	boolean existsByPhone(Long phone);
+    boolean existsByPhone(Long phone);
 
-	Users findByEmail(String email);
 
-	
-	List<Users> searchByStatus(String status);
+    List<Users> findByStatus(String status);
 
-	
-	List<Users> searchByname(String name);
+    List<Users> findByFullName(String fullName);
 
-	
-	List<Users> searchByPhone(String phone);
-	
-	
-	List<Users> searchByEmail(String email);
+    List<Users> findByPhone(Long phone);
 
+    List<Users> findByEmail(String email);
 }

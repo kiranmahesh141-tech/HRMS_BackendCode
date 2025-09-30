@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,10 +37,7 @@ public class HRController {
 		return new ResponseEntity<>(hrService.getAll(), HttpStatus.OK);
 	}
 
-	@GetMapping("/getByEmail/{email}")
-	public Users getUserbyEmail(@PathVariable String email) {
-		return hrService.getUserByEmail(email);
-	}
+	
 
 	@GetMapping("/searchName")
 	public ResponseEntity<List<Users>> searchUsersByName(@RequestParam("fullName") String name) {
@@ -50,7 +47,7 @@ public class HRController {
 
 	@GetMapping("/searchPhone")
 	public ResponseEntity<List<Users>> searchUsersByPhone(
-	    @RequestParam("phone") String phone
+	    @RequestParam("phone") Long phone
 	) {
 	    List<Users> users = hrService.searchPhone(phone);
 	    return ResponseEntity.ok(users);
