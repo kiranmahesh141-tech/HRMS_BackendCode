@@ -104,6 +104,6 @@ public class HRService {
     }
 
     public List<Users> searchByStatus(String status){
-        return URepo.searchByStatus();
+        return URepo.searchByStatus(status);
     }
 }
