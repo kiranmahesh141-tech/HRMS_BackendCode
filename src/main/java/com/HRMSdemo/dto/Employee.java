@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.HRMSdemo.validation.FirstNameValidation;
+import com.HRMSdemo.validation.Validations;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,16 +24,16 @@ public class Employee {
 
     @Size(min = 3)
     private String firstName;
-
     private String lastName;
     private String email;
-    private String phone;
+    private Long phone;
     private String gender;
     private String fullName;
 
     private String position;
     private String department;
     private String role;
+    private String status;
     private Double salary;
     private LocalDate hireDate;
 
@@ -46,10 +46,10 @@ public class Employee {
     private LocalDateTime updatedAt;
 
     @Transient // not persisted
-    private FirstNameValidation validation;
+    private Validations validation;
 
     // Pass validation class (Spring-managed) from service/controller
-    public void setValidation(FirstNameValidation validation) {
+    public void setValidation(Validations validation) {
         this.validation = validation;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.HRMSdemo.Exceptions.UserNotFoundException;
+import com.HRMSdemo.dto.Employee;
 import com.HRMSdemo.dto.Login;
 import com.HRMSdemo.dto.Users;
 import com.HRMSdemo.repository.LoginRepository;
@@ -68,8 +69,21 @@ public class HRService {
         login.setRole(status.equalsIgnoreCase("selected") ? role : null);
 
         // Set username and save once
-        login.setUsername(user.getFirstName() + UUID.randomUUID().toString().substring(0, 3));
+        
         lRepo.save(login);
+
+        //generate Employee details
+         Employee emp1= new Employee();
+        if (login!=null) {
+            emp1.setEmail(login.getEmail());
+            emp1.setRole(login.getRole());
+            emp1.setStatus(login.getStatus());
+        }
+        if(user!=null){
+            emp1.setFirstName(user.getFirstName());
+            emp1.setLastName(user.getLastName());
+            emp1.setPhone(user.getPhone());
+        }
 
         // Send email
         if (role != null && !role.isEmpty()) {

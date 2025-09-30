@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.HRMSdemo.repository.EmployeeRepository;
+import com.HRMSdemo.repository.LoginRepository;
 
 @Component
-public class FirstNameValidation {
+public class Validations {
 
     @Autowired
     private EmployeeRepository empRepository;
+    private LoginRepository lRepository;
 
     // Format first name: replace spaces with "_"
     public String formatFirstName(String firstName) {
@@ -33,4 +35,15 @@ public class FirstNameValidation {
 
         return empId;
     }
+    public String generateUserName(String userName){
+        String namePart = userName.substring(0, 3).toUpperCase();
+        String randomPart = UUID.randomUUID().toString().substring(0, 4).toUpperCase();
+        String uName=namePart+randomPart;
+
+        if(lRepository.existsByUsername(uName)){
+            return generateUserName(userName);
+        }
+        return uName;
+    }
+
 }

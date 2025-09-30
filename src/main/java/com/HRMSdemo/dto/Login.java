@@ -1,5 +1,7 @@
 package com.HRMSdemo.dto;
 
+import com.HRMSdemo.validation.Validations;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,6 +26,16 @@ public class Login {
     private String role;   
     
     private String status;
+    
+    @Transient // not persisted
+    private Validations validation;
+    public void setUsername(String username) {
+        if (validation != null) {
+            this.username = validation.generateUserName(username);
+        } else {
+            this.username = username;
+        }
+    }
     @OneToOne
     @JoinColumn(name = "uid",referencedColumnName = "iId")
     private Users users;

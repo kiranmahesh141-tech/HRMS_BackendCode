@@ -3,6 +3,7 @@ package com.HRMSdemo.dto;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.HRMSdemo.validation.Validations;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -47,6 +49,16 @@ public class Users {
 	private String fullName;
 	private String status="ONHOLD";
 	
+	@Transient // not persisted
+    private Validations validation;
+
+	public void setFirstName(String firstName) {
+        if (validation != null) {
+            this.firstName = validation.formatFirstName(firstName);
+        } else {
+            this.firstName = firstName;
+        }
+    }
 	
 	@PrePersist
 	@PreUpdate
