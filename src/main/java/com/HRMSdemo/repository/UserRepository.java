@@ -17,6 +17,9 @@ public interface UserRepository extends JpaRepository<Users, String> {
 
 	Users findByEmail(String email);
 
+	@Query("SELECT u FROM Users u WHERE u.status = 'ONHOLD'")
+	List<Users> searchByStatus();
+
 	@Query("SELECT u FROM Users u WHERE LOWER(u.fullName) LIKE LOWER(CONCAT('%', :name, '%'))")
 	List<Users> searchByname(@Param("name") String name);
 
