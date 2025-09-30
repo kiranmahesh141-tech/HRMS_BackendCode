@@ -62,7 +62,7 @@ public class HRController {
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
-    @GetMapping("/searchByStatus")
+    @GetMapping("/searchStatus")
     public ResponseEntity<List<Users>> searchByStatus(@RequestParam("status") String status){
         List<Users> users = hrService.searchByStatus(status);
         return new ResponseEntity<>(users,HttpStatus.OK);
